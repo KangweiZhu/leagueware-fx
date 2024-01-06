@@ -28,7 +28,7 @@
                <children>
                   <Button fx:id="overviewButton" mnemonicParsing="false" onAction="#overviewButtonOnClick" prefHeight="44.0" prefWidth="151.0" text="Overview" />
                   <Button fx:id="personInfoButton" mnemonicParsing="false" prefHeight="44.0" prefWidth="153.0" text="My Stats" GridPane.columnIndex="1" />
-                  <Button fx:id="searchPlayerButton" mnemonicParsing="false" prefHeight="44.0" prefWidth="162.0" text="Search Player" GridPane.columnIndex="2" />
+                  <Button fx:id="searchPlayerButton" mnemonicParsing="false" prefHeight="44.0" prefWidth="162.0" text="Search" GridPane.columnIndex="2" />
                   <Button fx:id="rankingButton" mnemonicParsing="false" prefHeight="44.0" prefWidth="157.0" text="Ranking" GridPane.columnIndex="3" />
                   <Button fx:id="toolsButton" mnemonicParsing="false" onAction="#toolsButtonOnClick" prefHeight="44.0" prefWidth="125.0" text="Tools" GridPane.columnIndex="4" />
                </children>

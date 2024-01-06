@@ -53,7 +53,10 @@ public class HttpsUtils {
     public Integer sendHttpRequestAndGetRespCode(String authorizationToken) throws IOException {
         // 设置请求地址
         URL url = new URL(apiUrl);
+
+        // 禁用SSL连接
         disableSslVerification();
+
         // 打开连接
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
