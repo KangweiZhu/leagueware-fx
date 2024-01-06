@@ -1,5 +1,9 @@
 package com.anicaaz.leaguewarefx.constants;
 
+/**
+ * 请求路径常量值
+ * @author anicaa
+ */
 public class RequestConstants {
 
     public static final String GET_CURRENT_SUMMONER_NAME = "/lol-summoner/v1/current-summoner";
