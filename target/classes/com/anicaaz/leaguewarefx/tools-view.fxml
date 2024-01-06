@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.anicaaz.leaguewarefx.controller.ToolsController">
+   <children>
+      <HBox prefHeight="45.0" prefWidth="413.0">
+         <children>
+            <GridPane prefHeight="45.0" prefWidth="400.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button fx:id="overviewButton" mnemonicParsing="false" onAction="#overviewButtonOnClick" prefHeight="44.0" prefWidth="151.0" text="Overview" />
+                  <Button fx:id="personInfoButton" mnemonicParsing="false" prefHeight="44.0" prefWidth="153.0" text="My Stats" GridPane.columnIndex="1" />
+                  <Button fx:id="searchPlayerButton" mnemonicParsing="false" prefHeight="44.0" prefWidth="83.0" text="Search " GridPane.columnIndex="2" />
+                  <Button fx:id="rankingButton" mnemonicParsing="false" prefHeight="44.0" prefWidth="157.0" text="Ranking" GridPane.columnIndex="3" />
+                  <Button fx:id="toolsButton" mnemonicParsing="false" onAction="#toolsButtonOnClick" prefHeight="44.0" prefWidth="109.0" text="Tools" GridPane.columnIndex="4" />
+               </children>
+            </GridPane>
+         </children>
+      </HBox>
+      <GridPane fx:id="mainGridPane" layoutX="8.0" layoutY="61.0" prefHeight="303.0" prefWidth="385.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="104.0" minWidth="10.0" prefWidth="80.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="104.0" minWidth="10.0" prefWidth="81.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="0.0" prefWidth="84.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <CheckBox fx:id="autoAcceptCheckBox" mnemonicParsing="false" onAction="#autoAcceptedCheckBoxOnClicked" prefHeight="18.0" prefWidth="102.0" text="自动接受" />
+            <CheckBox mnemonicParsing="false" text="伪装离线" GridPane.rowIndex="1" />
+            <CheckBox fx:id="autoDeclineCheckBox" mnemonicParsing="false" onAction="#autoDeclineCheckBoxOnClicked" text="自动拒绝" GridPane.rowIndex="2" />
+            <CheckBox fx:id="fakePromotionCheckBox" mnemonicParsing="false" onAction="#fakePromotionCheckBoxOnClicked" text="一键虚荣" GridPane.rowIndex="3" />
+            <ChoiceBox fx:id="fakePromotionChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+   </children>
+</Pane>
