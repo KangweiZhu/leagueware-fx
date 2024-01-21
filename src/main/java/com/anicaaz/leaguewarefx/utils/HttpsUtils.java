@@ -27,6 +27,7 @@ public class HttpsUtils {
         // 设置请求地址
         URL url = new URL(apiUrl);
         disableSslVerification();
+
         // 打开连接
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 

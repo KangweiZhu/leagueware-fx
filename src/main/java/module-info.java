@@ -8,7 +8,13 @@ module com.anicaaz.leaguewarefx {
     requires io.netty.all;
 
     opens com.anicaaz.leaguewarefx to javafx.fxml;
+    opens com.anicaaz.leaguewarefx.controller to javafx.fxml;
+    opens com.anicaaz.leaguewarefx.utils to javafx.fxml;
+
     exports com.anicaaz.leaguewarefx;
     exports com.anicaaz.leaguewarefx.controller;
-    opens com.anicaaz.leaguewarefx.controller to javafx.fxml;
+    exports com.anicaaz.leaguewarefx.utils;
+    exports com.anicaaz.leaguewarefx.constants;
+    exports com.anicaaz.leaguewarefx.uiPlayground;
+    exports com.anicaaz.leaguewarefx.ui.obj;
 }

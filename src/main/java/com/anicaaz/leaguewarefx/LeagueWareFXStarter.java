@@ -1,10 +1,7 @@
 package com.anicaaz.leaguewarefx;
 
 import com.anicaaz.leaguewarefx.constants.RequestConstants;
-import com.anicaaz.leaguewarefx.utils.EncodingUtil;
-import com.anicaaz.leaguewarefx.utils.ExecuteCommand;
-import com.anicaaz.leaguewarefx.utils.HttpsUtils;
-import com.anicaaz.leaguewarefx.utils.LogUtil;
+import com.anicaaz.leaguewarefx.utils.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,6 +21,7 @@ public class LeagueWareFXStarter extends Application {
     public static Long accountId;
     public static Integer profileIconId;
     public static Integer summonerLevel;
+    public static final String RUNNING_PLATFORM = OSUtil.checkPlatform();
 
     /**
      * 从main-view中加载主页，并设置窗口属性。
@@ -35,6 +33,7 @@ public class LeagueWareFXStarter extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(LeagueWareFXStarter.class.getResource("main-view.fxml"));
+        System.out.println(LeagueWareFXStarter.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 400, 700);
         stage.setTitle("LeagueWare");
         stage.setScene(scene);

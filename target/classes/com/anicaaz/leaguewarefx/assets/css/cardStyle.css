@@ -1,0 +1,35 @@
+#card-root {
+    -fx-background-color: #2a2a2a;
+    -fx-padding: 10;
+}
+
+.card-border {
+    -fx-background-color:
+            linear-gradient(to bottom, #ffffff, #a8a8a8),
+            linear-gradient(to right, #ffffff, #a8a8a8);
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 15, 14;
+    -fx-padding: 15;
+    -fx-border-color:
+            linear-gradient(to bottom, #ffffff, #a8a8a8),
+            linear-gradient(to right, #ffffff, #a8a8a8),
+            linear-gradient(to bottom, #ffffff, #a8a8a8),
+            linear-gradient(to right, #ffffff, #a8a8a8);
+    -fx-border-insets: 0, 1, 2, 3;
+    -fx-border-width: 1, 1, 1, 1;
+    -fx-border-style: solid, solid, solid, solid;
+    -fx-border-radius: 15, 14, 13, 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 5, 0.0, 0, 1);
+}
+
+#card-title {
+    -fx-font-size: 24px;
+    -fx-text-fill: #e2e2e2;
+    -fx-effect: dropshadow(one-pass-box, black, 3, 0.0, 1, 1);
+}
+
+#card-description {
+    -fx-font-size: 16px;
+    -fx-text-fill: #cccccc;
+    -fx-effect: dropshadow(one-pass-box, black, 2, 0.0, 1, 1);
+}
