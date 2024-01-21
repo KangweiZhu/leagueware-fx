@@ -6,6 +6,9 @@ module com.anicaaz.leaguewarefx {
     requires jdk.httpserver;
     requires littleproxy;
     requires io.netty.all;
+    requires com.sun.jna;
+    requires com.sun.jna.platform;
+    requires com.google.gson;
 
     opens com.anicaaz.leaguewarefx to javafx.fxml;
     opens com.anicaaz.leaguewarefx.controller to javafx.fxml;

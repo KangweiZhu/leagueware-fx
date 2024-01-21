@@ -4,7 +4,7 @@ import com.anicaaz.leaguewarefx.LeagueWareFXStarter;
 import com.anicaaz.leaguewarefx.constants.AssetsFilePathConstants;
 import com.anicaaz.leaguewarefx.constants.RequestConstants;
 import com.anicaaz.leaguewarefx.utils.FileUtil;
-import com.anicaaz.leaguewarefx.utils.HttpsUtils;
+import com.anicaaz.leaguewarefx.utils.HttpsUtil;
 import com.anicaaz.leaguewarefx.utils.LogUtil;
 import com.sun.net.httpserver.HttpServer;
 import javafx.fxml.FXML;
@@ -85,10 +85,10 @@ public class MainController implements Initializable {
             profileIcon.setImage(new Image(AssetsFilePathConstants.profileIconFilePath));
         } else {
             LogUtil.log(getClass().getName(), "setprofileIcon", "图片不存在，开始下载。");
-            String apiUrl = HttpsUtils.constructUrl(RequestConstants.BASEURL, LeagueWareFXStarter.appPort, RequestConstants.GET_PROFILE_ICON + "/" + LeagueWareFXStarter.profileIconId + ".jpg");
-            HttpsUtils httpsUtils = new HttpsUtils(apiUrl, RequestConstants.GET);
+            String apiUrl = HttpsUtil.constructUrl(RequestConstants.BASEURL, LeagueWareFXStarter.appPort, RequestConstants.GET_PROFILE_ICON + "/" + LeagueWareFXStarter.profileIconId + ".jpg");
+            HttpsUtil httpsUtil = new HttpsUtil(apiUrl, RequestConstants.GET);
             try {
-                httpsUtils.downloadImage(AssetsFilePathConstants.profileIconRootPath, LeagueWareFXStarter.remotingAuthToken);
+                httpsUtil.downloadImage(AssetsFilePathConstants.profileIconRootPath, LeagueWareFXStarter.remotingAuthToken);
                 profileIcon.setImage(new Image(AssetsFilePathConstants.profileIconFilePath));
             } catch (Exception e) {
                 throw new RuntimeException(e);

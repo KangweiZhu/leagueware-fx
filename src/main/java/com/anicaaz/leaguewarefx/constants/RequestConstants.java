@@ -11,9 +11,13 @@ public class RequestConstants {
     public static final String POST_AUTO_ACCEPT = "/lol-matchmaking/v1/ready-check/accept";
     public static final String POST_AUTO_DECLINE = "/lol-matchmaking/v1/ready-check/decline";
     public static final String CLIENT_NOTIFICATION = "/lol-ranked/v1/notifications";
+    public static final String CHAMPION_LOADING_SCREEN_SKIN = "/lol-game-data/assets/v1/"; //todo:
+    public static final String ALL_GAME_DATA = "/liveclientdata/allgamedata";
+    public static final String PLAYER_LIST = "/liveclientdata/playerlist";
     public static final String BASEURL = "https://127.0.0.1:";
     public static final String GET = "GET";
     public static final String POST = "POST";
     public static final String DELETE = "DELETE";
+    public static final Integer GAME_CLIENT_PORT = 2999;
 
 }

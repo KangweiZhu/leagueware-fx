@@ -2,7 +2,7 @@ package com.anicaaz.leaguewarefx.controller;
 
 import com.anicaaz.leaguewarefx.LeagueWareFXStarter;
 import com.anicaaz.leaguewarefx.constants.RequestConstants;
-import com.anicaaz.leaguewarefx.utils.HttpsUtils;
+import com.anicaaz.leaguewarefx.utils.HttpsUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -59,13 +59,13 @@ public class ToolsController {
         }
         timer = new Timer();
         if (autoAcceptCheckBox.isSelected()) {
-            String apiUrl = HttpsUtils.constructUrl(RequestConstants.BASEURL, LeagueWareFXStarter.appPort, RequestConstants.POST_AUTO_ACCEPT);
-            HttpsUtils httpsUtils = new HttpsUtils(apiUrl, RequestConstants.POST);
+            String apiUrl = HttpsUtil.constructUrl(RequestConstants.BASEURL, LeagueWareFXStarter.appPort, RequestConstants.POST_AUTO_ACCEPT);
+            HttpsUtil httpsUtil = new HttpsUtil(apiUrl, RequestConstants.POST);
             timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
                     try {
-                        httpsUtils.sendHttpRequestAndGetRespCode(LeagueWareFXStarter.remotingAuthToken);
+                        httpsUtil.sendHttpRequestAndGetRespCode(LeagueWareFXStarter.remotingAuthToken);
                         System.out.println("auto accept sending");
                     } catch (IOException e) {
                         throw new RuntimeException(e);
@@ -87,13 +87,13 @@ public class ToolsController {
         }
         timer = new Timer();
         if (autoDeclineCheckBox.isSelected()) {
-            String apiUrl = HttpsUtils.constructUrl(RequestConstants.BASEURL, LeagueWareFXStarter.appPort, RequestConstants.POST_AUTO_DECLINE);
-            HttpsUtils httpsUtils = new HttpsUtils(apiUrl, RequestConstants.POST);
+            String apiUrl = HttpsUtil.constructUrl(RequestConstants.BASEURL, LeagueWareFXStarter.appPort, RequestConstants.POST_AUTO_DECLINE);
+            HttpsUtil httpsUtil = new HttpsUtil(apiUrl, RequestConstants.POST);
             timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
                     try {
-                        httpsUtils.sendHttpRequestAndGetRespCode(LeagueWareFXStarter.remotingAuthToken);
+                        httpsUtil.sendHttpRequestAndGetRespCode(LeagueWareFXStarter.remotingAuthToken);
                         System.out.println("auto decline sending");
                     } catch (IOException e) {
                         throw new RuntimeException(e);

@@ -63,10 +63,10 @@ public class LeagueWareFXStarter extends Application {
     }
 
     public static void getSummonerInfo() {
-        String apiUrl = HttpsUtils.constructUrl(RequestConstants.BASEURL, appPort,  RequestConstants.GET_CURRENT_SUMMONER_NAME);
-        HttpsUtils httpsUtils = new HttpsUtils(apiUrl, RequestConstants.GET);
+        String apiUrl = HttpsUtil.constructUrl(RequestConstants.BASEURL, appPort,  RequestConstants.GET_CURRENT_SUMMONER_NAME);
+        HttpsUtil httpsUtil = new HttpsUtil(apiUrl, RequestConstants.GET);
         try {
-            Map<String, Object> stringObjectMap = httpsUtils.sendHttpRequest(remotingAuthToken);
+            Map<String, Object> stringObjectMap = httpsUtil.sendHttpRequest(remotingAuthToken);
             gameName = (String) stringObjectMap.get("gameName");
             accountId = (Long) stringObjectMap.get("accountId");
             profileIconId = (Integer) stringObjectMap.get("profileIconId");
