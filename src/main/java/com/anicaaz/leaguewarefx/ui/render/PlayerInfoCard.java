@@ -1,4 +1,4 @@
-package com.anicaaz.leaguewarefx.ui.obj;
+package com.anicaaz.leaguewarefx.ui.render;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

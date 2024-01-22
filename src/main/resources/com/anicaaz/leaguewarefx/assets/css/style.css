@@ -1,0 +1,13 @@
+.notification-label {
+    -fx-background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+    -fx-text-fill: white; /* 白色文本 */
+    -fx-padding: 10px; /* 内边距 */
+    -fx-font-size: 16px; /* 字体大小 */
+    -fx-font-weight: bold; /* 字体粗细 */
+}
+
+.root {
+    -fx-background-radius: 10; /* 背景圆角 */
+    -fx-background-insets: 5; /* 背景内边距 */
+    -fx-background-color: transparent;
+}

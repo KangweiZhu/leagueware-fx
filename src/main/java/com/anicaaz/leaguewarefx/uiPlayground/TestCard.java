@@ -1,7 +1,7 @@
 package com.anicaaz.leaguewarefx.uiPlayground;
 
 import com.anicaaz.leaguewarefx.constants.AssetsFilePathConstants;
-import com.anicaaz.leaguewarefx.ui.obj.PlayerInfoCard;
+import com.anicaaz.leaguewarefx.ui.render.PlayerInfoCard;
 import javafx.animation.ParallelTransition;
 import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;

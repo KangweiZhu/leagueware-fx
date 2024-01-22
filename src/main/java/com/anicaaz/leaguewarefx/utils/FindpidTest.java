@@ -20,37 +20,11 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
+@Deprecated
 public class FindpidTest {
 
-    public static WinDef.DWORD findPid() {
-        WinNT.HANDLE snapshot = Kernel32.INSTANCE.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPPROCESS, new WinDef.DWORD(0));
-        Tlhelp32.PROCESSENTRY32 processEntry = new Tlhelp32.PROCESSENTRY32();
-        WinDef.DWORD pid = null;
-        while (Kernel32.INSTANCE.Process32Next(snapshot, processEntry)) {
-            String processName = Native.toString(processEntry.szExeFile);
-            if (processName.equals("League of Legends.exe")) {
-                pid = processEntry.th32ProcessID;
-                System.out.println("Found League of Legends process with PID: " + processEntry.th32ProcessID);
-            }
-        }
-        return pid;
-    }
-
-    public static boolean checkIfProcessExists () {
-        WinNT.HANDLE snapshot = Kernel32.INSTANCE.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPPROCESS, new WinDef.DWORD(0));
-        Tlhelp32.PROCESSENTRY32 processEntry = new Tlhelp32.PROCESSENTRY32();
-        WinDef.DWORD pid = null;
-        while (Kernel32.INSTANCE.Process32Next(snapshot, processEntry)) {
-            String processName = Native.toString(processEntry.szExeFile);
-            if (processName.equals("League of Legends.exe")) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public static void main(String[] args) throws IOException {
-        while (checkIfProcessExists()) {
+        while (OSUtil.checkProcess("League of Legends.exe")) {
 
         }
         LogUtil.log(FindpidTest.class.getName(), "main", "Game Client is running");

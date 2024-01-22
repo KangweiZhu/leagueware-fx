@@ -2,17 +2,28 @@ package com.anicaaz.leaguewarefx.controller;
 
 import com.anicaaz.leaguewarefx.LeagueWareFXStarter;
 import com.anicaaz.leaguewarefx.constants.RequestConstants;
+import com.anicaaz.leaguewarefx.constants.ServiceConstants;
+import com.anicaaz.leaguewarefx.service.PlayerService;
+import com.anicaaz.leaguewarefx.ui.obj.GameData;
+import com.anicaaz.leaguewarefx.ui.obj.Player;
 import com.anicaaz.leaguewarefx.utils.HttpsUtil;
+import com.anicaaz.leaguewarefx.utils.LogUtil;
+import com.anicaaz.leaguewarefx.utils.OSUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -39,15 +50,21 @@ public class ToolsController {
     private CheckBox fakePromotionCheckBox;
     @FXML
     private ChoiceBox fakePromotionChoiceBox;
+    @FXML
+    private CheckBox ingameOverlayCheckBox;
     private Timer timer;
+    private Thread monitorIngameOverlayThread;
+    private volatile boolean monitorIngameOverlayThreadFlag;
+    private static final PlayerService playerService = new PlayerService();
+
     @FXML
     public void toolsButtonOnClick() {
-        loadView("tools-view.fxml");
+        loadView("views/tools-view.fxml");
     }
 
     @FXML
     public void overviewButtonOnClick() {
-        loadView("main-view.fxml");
+        loadView("views/main-view.fxml");
     }
 
     /**
@@ -113,6 +130,68 @@ public class ToolsController {
 
     private void initProxyServer() {
 
+    }
+
+    /**
+     * 游戏内绘制按钮被选中，或点击后变成未选中状态。通过多线程来解决干扰。
+     *
+     */
+    public void inGameOverlayCheckBoxOnClicked() {
+        if (ingameOverlayCheckBox.isSelected()) {
+            monitorIngameOverlayThreadFlag = true;
+            monitorIngameOverlayThread = new Thread(() -> {
+                try {
+                    this.ingameOverlayHelper();
+                } catch (IOException e) {
+                    LogUtil.log(ToolsController.class.getName(), "inGameOverlayCheckBoxOnClicked", "IOException");
+                    throw new RuntimeException(e);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                } finally {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "请重新启动游戏，并重新选中【游戏内绘制选项】");
+                    alert.show();
+                }
+            });
+            monitorIngameOverlayThread.start();
+        } else {
+            monitorIngameOverlayThreadFlag = false;
+        }
+    }
+
+    private void ingameOverlayHelper() throws IOException, InterruptedException {
+        int logFlag = 0;
+        //如果一直为true，则进程一直执行。
+        while (monitorIngameOverlayThreadFlag) {
+            while (OSUtil.checkProcess("League of Legends.exe")) {
+                if (logFlag >= 1) {
+                    return;
+                }
+            }
+            if (logFlag == 0) {
+                LogUtil.log(ToolsController.class.getName(), "ingameOverlayHelper", "Game Client is running");
+                logFlag++;
+                //停0.5秒，等待端口被暴露
+                Thread.sleep(6000);
+            }
+
+            //向端口发送消息，并等待返回值
+            HttpsUtil httpsUtil = new HttpsUtil(RequestConstants.BASEURL + RequestConstants.GAME_CLIENT_PORT + RequestConstants.ALL_GAME_DATA, RequestConstants.GET);
+            String res = httpsUtil.sendHttpRequestAndGetResponse();
+            ObjectMapper objectMapper = new ObjectMapper();
+            GameData gameData = objectMapper.readValue(res, GameData.class);
+            List<Player> playerList = gameData.getAllPlayers();
+
+            //物品更新逻辑
+            playerService.setPlayerList(playerList);
+            if (playerService.getPrevplayerList() == null || playerService.getPrevplayerList().isEmpty()) {
+                playerService.setPrevplayerList(playerList);
+            }
+            playerService.checkPlayerItemUpdate();
+            playerService.setPrevplayerList(playerList);
+
+            // 停0.5秒。
+            Thread.sleep(500);
+        }
     }
 
     private void loadView(String fxmlFileName) {

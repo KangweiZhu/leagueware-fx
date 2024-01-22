@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.anicaaz.leaguewarefx.controller.ToolsController">
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.anicaaz.leaguewarefx.controller.ToolsController">
    <children>
       <HBox prefHeight="45.0" prefWidth="413.0">
          <children>
@@ -54,6 +54,7 @@
             <CheckBox fx:id="autoDeclineCheckBox" mnemonicParsing="false" onAction="#autoDeclineCheckBoxOnClicked" text="自动拒绝" GridPane.rowIndex="2" />
             <CheckBox fx:id="fakePromotionCheckBox" mnemonicParsing="false" onAction="#fakePromotionCheckBoxOnClicked" text="一键虚荣" GridPane.rowIndex="3" />
             <ChoiceBox fx:id="fakePromotionChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <CheckBox fx:id="ingameOverlayCheckBox" mnemonicParsing="false" onAction="#inGameOverlayCheckBoxOnClicked" prefWidth="104.0" text="游戏内覆盖" GridPane.rowIndex="4" />
          </children>
       </GridPane>
    </children>

@@ -1,4 +1,4 @@
-package com.anicaaz.leaguewarefx.ui.obj;
+package com.anicaaz.leaguewarefx.ui.render;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

@@ -5,6 +5,7 @@ import com.anicaaz.leaguewarefx.utils.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,6 +23,9 @@ public class LeagueWareFXStarter extends Application {
     public static Integer profileIconId;
     public static Integer summonerLevel;
     public static final String RUNNING_PLATFORM = OSUtil.checkPlatform();
+    public static Double SCREEN_HEIGHT;
+    public static Double SCREEN_WIDTH;
+
 
     /**
      * 从main-view中加载主页，并设置窗口属性。
@@ -32,8 +36,7 @@ public class LeagueWareFXStarter extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(LeagueWareFXStarter.class.getResource("main-view.fxml"));
-        System.out.println(LeagueWareFXStarter.class.getResource("main-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(LeagueWareFXStarter.class.getResource("views/main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 400, 700);
         stage.setTitle("LeagueWare");
         stage.setScene(scene);
@@ -48,6 +51,7 @@ public class LeagueWareFXStarter extends Application {
     public static void main(String[] args) {
         getConnectionPrerequisites();
         getSummonerInfo();
+        getScreenInfo();
         launch();
     }
 
@@ -74,5 +78,11 @@ public class LeagueWareFXStarter extends Application {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void getScreenInfo() {
+        Screen screen = Screen.getPrimary();
+        SCREEN_HEIGHT = (Double) screen.getBounds().getHeight();
+        SCREEN_WIDTH = (Double) screen.getBounds().getWidth();
     }
 }

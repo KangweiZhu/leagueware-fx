@@ -50,7 +50,7 @@ public class MainController implements Initializable {
      */
     @FXML
     public void toolsButtonOnClick() {
-        loadView("tools-view.fxml");
+        loadView("views/tools-view.fxml");
     }
 
     /**
@@ -58,7 +58,7 @@ public class MainController implements Initializable {
      */
     @FXML
     public void overviewButtonOnClick() {
-        loadView("main-view.fxml");
+        loadView("views/main-view.fxml");
     }
 
     /**
