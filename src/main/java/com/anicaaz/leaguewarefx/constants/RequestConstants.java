@@ -10,6 +10,7 @@ public class RequestConstants {
     public static final String GET_PROFILE_ICON = "/lol-game-data/assets/v1/profile-icons";
     public static final String POST_AUTO_ACCEPT = "/lol-matchmaking/v1/ready-check/accept";
     public static final String POST_AUTO_DECLINE = "/lol-matchmaking/v1/ready-check/decline";
+    public static final String GET_MATCH_HISTORY = "/lol-match-history/v1/products/lol/current-summoner/matches";
     public static final String CLIENT_NOTIFICATION = "/lol-ranked/v1/notifications";
     public static final String CHAMPION_LOADING_SCREEN_SKIN = "/lol-game-data/assets/v1/"; //todo:
     public static final String ALL_GAME_DATA = "/liveclientdata/allgamedata";

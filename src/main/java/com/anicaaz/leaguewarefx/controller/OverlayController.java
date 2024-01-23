@@ -1,4 +1,5 @@
-package com.anicaaz.leaguewarefx.controller;// NotificationManager.java
+package com.anicaaz.leaguewarefx.controller;
+
 import com.anicaaz.leaguewarefx.constants.AssetsFilePathConstants;
 import javafx.application.Platform;
 import javafx.scene.Scene;

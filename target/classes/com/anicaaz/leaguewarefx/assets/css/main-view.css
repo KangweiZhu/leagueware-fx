@@ -1,0 +1,32 @@
+.root-pane{
+    -fx-background-color: #2D3848;
+
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+
+    -fx-border-color: white;
+    -fx-border-width: 0.5;
+}
+.grid-pane-tool-bar{
+    -fx-background-color: #172636;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-color: white;
+    -fx-border-width: 0.5;
+}
+#overviewButton{
+    -fx-background-color: transparent;
+
+}
+#personInfoButton{
+    -fx-background-color: transparent;
+}
+#rankingButton{
+    -fx-background-color: transparent;
+}
+#searchPlayerButton{
+    -fx-background-color: transparent;
+}
+#toolsButton{
+    -fx-background-color: transparent;
+}

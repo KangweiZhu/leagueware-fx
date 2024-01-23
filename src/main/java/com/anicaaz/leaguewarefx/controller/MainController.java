@@ -3,10 +3,12 @@ package com.anicaaz.leaguewarefx.controller;
 import com.anicaaz.leaguewarefx.LeagueWareFXStarter;
 import com.anicaaz.leaguewarefx.constants.AssetsFilePathConstants;
 import com.anicaaz.leaguewarefx.constants.RequestConstants;
+import com.anicaaz.leaguewarefx.utils.EffectsRenderer;
 import com.anicaaz.leaguewarefx.utils.FileUtil;
 import com.anicaaz.leaguewarefx.utils.HttpsUtil;
 import com.anicaaz.leaguewarefx.utils.LogUtil;
 import com.sun.net.httpserver.HttpServer;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +30,8 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
     @FXML
     private Pane mainPane;
+    @FXML
+    private Pane subPane;
     @FXML
     private Button overviewButton;
     @FXML
@@ -65,7 +70,7 @@ public class MainController implements Initializable {
      * 设置用户名称。
      */
     public void setSummonerName() {
-        summonerName.setText("召唤师名称: " + LeagueWareFXStarter.gameName);
+        summonerName.setText(LeagueWareFXStarter.gameName);
     }
 
     /**
@@ -107,6 +112,7 @@ public class MainController implements Initializable {
         setprofileIcon();
         setSummonerName();
         setSummonerLevel();
+        EffectsRenderer.addFadeInFadeOut(0.2, subPane);
     }
 
     /**
