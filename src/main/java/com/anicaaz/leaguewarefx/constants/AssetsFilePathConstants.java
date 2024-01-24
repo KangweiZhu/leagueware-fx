@@ -7,4 +7,6 @@ package com.anicaaz.leaguewarefx.constants;
 public class AssetsFilePathConstants {
     public static final String profileIconFilePath = "/com/anicaaz/leaguewarefx/assets/static/profileIcon.jpg";
     public static final String profileIconRootPath = "src/main/resources/com/anicaaz/leaguewarefx/assets/static/profileIcon.jpg";
+    public static final String CHAMPIONICONSROOT = "src/main/resources/com/anicaaz/leaguewarefx/assets/static/championIcons/";
+    public static final String CHAMPIONICONSROOTIMAGE = "com/anicaaz/leaguewarefx/assets/static/championIcons/";
 }

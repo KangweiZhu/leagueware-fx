@@ -32,7 +32,6 @@ public class PlayerCard extends Pane {
         champImage.setFitHeight(220);
         champImage.setFitWidth(110);
 
-
         this.getChildren().add(champImage);
     }
 }

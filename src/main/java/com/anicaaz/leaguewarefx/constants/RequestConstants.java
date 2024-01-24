@@ -13,6 +13,9 @@ public class RequestConstants {
     public static final String GET_MATCH_HISTORY = "/lol-match-history/v1/products/lol/current-summoner/matches";
     public static final String CLIENT_NOTIFICATION = "/lol-ranked/v1/notifications";
     public static final String CHAMPION_LOADING_SCREEN_SKIN = "/lol-game-data/assets/v1/"; //todo:
+    public static final String SUMMONER_SPELL_JSON = "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/summoner-spells.json";
+    public static final String SUMMONER_SPELL_ROOT = "lol-game-data/assets/DATA/Spells/Icons2D/";
+    public static final String CHAMPION_ICON_BASE = "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/";
     public static final String ALL_GAME_DATA = "/liveclientdata/allgamedata";
     public static final String PLAYER_LIST = "/liveclientdata/playerlist";
     public static final String BASEURL = "https://127.0.0.1:";

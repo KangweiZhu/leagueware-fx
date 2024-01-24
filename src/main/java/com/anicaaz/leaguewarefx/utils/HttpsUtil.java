@@ -132,6 +132,18 @@ public class HttpsUtil {
         outStream.close();
     }
 
+    public void downloadImage(String filePath) throws Exception {
+        URL url = new URL(apiUrl);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod(requestMethod);
+        InputStream inStream = connection.getInputStream();
+        byte[] data = readInputStream(inStream);
+        File imageFile = new File(filePath);
+        FileOutputStream outStream = new FileOutputStream(imageFile);
+        outStream.write(data);
+        outStream.close();
+    }
+
     public static byte[] readInputStream(InputStream inStream) throws Exception {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         // 创建一个Buffer字符串

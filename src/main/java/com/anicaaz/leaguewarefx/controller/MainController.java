@@ -3,10 +3,12 @@ package com.anicaaz.leaguewarefx.controller;
 import com.anicaaz.leaguewarefx.LeagueWareFXStarter;
 import com.anicaaz.leaguewarefx.constants.AssetsFilePathConstants;
 import com.anicaaz.leaguewarefx.constants.RequestConstants;
+import com.anicaaz.leaguewarefx.ui.clientobj.*;
 import com.anicaaz.leaguewarefx.utils.EffectsRenderer;
 import com.anicaaz.leaguewarefx.utils.FileUtil;
 import com.anicaaz.leaguewarefx.utils.HttpsUtil;
 import com.anicaaz.leaguewarefx.utils.LogUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpServer;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
@@ -14,14 +16,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -48,7 +53,12 @@ public class MainController implements Initializable {
     private Text summonerName;
     @FXML
     private Text summonerLevel;
-    private static HttpServer httpServer;
+    @FXML
+    private ImageView currentRankImage;
+    @FXML
+    private ImageView historyHighestRankImage;
+    @FXML
+    private ListView matchHistoryList;
 
     /**
      * 如果点击到tools，那么就加载tool-view的fxml文件。
@@ -94,12 +104,63 @@ public class MainController implements Initializable {
             HttpsUtil httpsUtil = new HttpsUtil(apiUrl, RequestConstants.GET);
             try {
                 httpsUtil.downloadImage(AssetsFilePathConstants.profileIconRootPath, LeagueWareFXStarter.remotingAuthToken);
+                Thread.sleep(3000);//等待下载
                 profileIcon.setImage(new Image(AssetsFilePathConstants.profileIconFilePath));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
+    }
 
+    public void setUpMyMatchHistory() {
+        HttpsUtil httpsUtil = new HttpsUtil(RequestConstants.BASEURL + LeagueWareFXStarter.appPort + RequestConstants.GET_MATCH_HISTORY, RequestConstants.GET);
+        try {
+            String res = httpsUtil.sendHttpRequestAndGetResponse(LeagueWareFXStarter.remotingAuthToken);
+            ObjectMapper objectMapper = new ObjectMapper();
+            GameData gameData = objectMapper.readValue(res, GameData.class);
+            List<Game> gamesList = gameData.getGames().getGames();
+            int cnt = 0;
+            for (Game game : gamesList) {
+                if (cnt == 0) {
+                    cnt ++;
+                    String mode = game.getGameMode();
+                    List<ParticipantIdentity> participantIdentities = game.getParticipantIdentities();
+                    List<Participant> participants = game.getParticipants();
+                    Participant me = participants.get(0);
+                    Stats stats = me.getStats();
+                    Long gameDateRaw = game.getGameCreation();
+                    int gameDurationRaw = game.getGameDuration();
+                    int item1Raw = stats.getItem1();
+                    int item2Raw = stats.getItem2();
+                    int item3Raw = stats.getItem3();
+                    int item4Raw = stats.getItem4();
+                    int item5Raw = stats.getItem5();
+                    int item6Raw = stats.getItem6();
+                    int item7Raw = stats.getVisionWardsBoughtInGame();
+                    int kill = stats.getKills();
+                    int death = stats.getDeaths();
+                    int assist = stats.getAssists();
+                    int summonerSpell1Raw = me.getSpell1Id();
+                    int summonerSpell2Raw = me.getSpell2Id();
+                    int championPlayedRaw = me.getChampionId();
+                    String kda = kill + " / " + death + " / " + assist;
+                    String result = me.getStats().isWin() ? "胜利" : "失败";
+                    System.out.println(kda);
+                    System.out.println(championPlayedRaw);
+                    Image image;
+                    if (!FileUtil.checkIfFileExist(AssetsFilePathConstants.CHAMPIONICONSROOT + championPlayedRaw + ".png")) {
+                        HttpsUtil imageDownloader = new HttpsUtil(RequestConstants.CHAMPION_ICON_BASE + championPlayedRaw + ".png", RequestConstants.GET);
+                        imageDownloader.downloadImage(AssetsFilePathConstants.CHAMPIONICONSROOT + championPlayedRaw + ".png");
+                    }
+                    image = new Image(AssetsFilePathConstants.CHAMPIONICONSROOTIMAGE + championPlayedRaw + ".png");
+                }
+            }
+        } catch (IOException e) {
+            LogUtil.log("无法获取到比赛记录");
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -112,7 +173,8 @@ public class MainController implements Initializable {
         setprofileIcon();
         setSummonerName();
         setSummonerLevel();
-        EffectsRenderer.addFadeInFadeOut(0.2, subPane);
+        setUpMyMatchHistory();
+        EffectsRenderer.addFadeInFadeOut(0.32, subPane);
     }
 
     /**

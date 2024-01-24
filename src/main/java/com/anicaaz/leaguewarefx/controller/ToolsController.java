@@ -2,10 +2,9 @@ package com.anicaaz.leaguewarefx.controller;
 
 import com.anicaaz.leaguewarefx.LeagueWareFXStarter;
 import com.anicaaz.leaguewarefx.constants.RequestConstants;
-import com.anicaaz.leaguewarefx.constants.ServiceConstants;
 import com.anicaaz.leaguewarefx.service.PlayerService;
-import com.anicaaz.leaguewarefx.ui.obj.GameData;
-import com.anicaaz.leaguewarefx.ui.obj.Player;
+import com.anicaaz.leaguewarefx.ui.ingameobj.GameData;
+import com.anicaaz.leaguewarefx.ui.ingameobj.Player;
 import com.anicaaz.leaguewarefx.utils.EffectsRenderer;
 import com.anicaaz.leaguewarefx.utils.HttpsUtil;
 import com.anicaaz.leaguewarefx.utils.LogUtil;
@@ -202,6 +201,6 @@ public class ToolsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        EffectsRenderer.addFadeInFadeOut(0.2, subPane);
+        EffectsRenderer.addFadeInFadeOut(0.32, subPane);
     }
 }

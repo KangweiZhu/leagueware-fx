@@ -1,8 +1,8 @@
 package com.anicaaz.leaguewarefx.service;
 
 import com.anicaaz.leaguewarefx.controller.OverlayController;
-import com.anicaaz.leaguewarefx.ui.obj.Item;
-import com.anicaaz.leaguewarefx.ui.obj.Player;
+import com.anicaaz.leaguewarefx.ui.ingameobj.Item;
+import com.anicaaz.leaguewarefx.ui.ingameobj.Player;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

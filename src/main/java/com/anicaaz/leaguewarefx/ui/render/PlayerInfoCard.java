@@ -48,7 +48,6 @@ public class PlayerInfoCard extends VBox {
         this.setAlignment(Pos.CENTER);
         this.setSpacing(10);
         this.getChildren().addAll(heroPortrait, nickname, runes, summonerSkill1, summonerSkill2);
-
     }
 }
 

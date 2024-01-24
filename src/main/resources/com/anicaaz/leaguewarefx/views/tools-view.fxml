@@ -12,7 +12,7 @@
 
 <Pane fx:id="mainPane" prefHeight="800.0" prefWidth="1320.0" styleClass="root-pane" stylesheets="@../assets/css/main-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.anicaaz.leaguewarefx.controller.ToolsController">
    <children>
-      <GridPane prefHeight="50.0" prefWidth="1320.0" styleClass="grid-pane-tool-bar">
+      <GridPane layoutX="20.0" layoutY="10.0" prefHeight="55.0" prefWidth="1280.0" styleClass="grid-pane-tool-bar">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -26,34 +26,34 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="overviewButton" mnemonicParsing="false" onAction="#overviewButtonOnClick" prefHeight="40.0" prefWidth="200.0" text="个人档案" textFill="WHITE" GridPane.columnIndex="1">
-               <font>
-                  <Font name="System Bold Italic" size="16.0" />
-               </font>
-            </Button>
-            <Button fx:id="personInfoButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="英雄" textFill="WHITE" GridPane.columnIndex="2">
-               <font>
-                  <Font name="System Bold Italic" size="16.0" />
-               </font>
-            </Button>
-            <Button fx:id="searchPlayerButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="搜索" textFill="WHITE" GridPane.columnIndex="3">
+            <Button fx:id="overviewButton" mnemonicParsing="false" onAction="#overviewButtonOnClick" prefHeight="55.0" prefWidth="200.0" text="个人档案" textFill="WHITE" GridPane.columnIndex="1">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="rankingButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="排行榜" textFill="WHITE" GridPane.columnIndex="4">
+            <Button fx:id="personInfoButton" mnemonicParsing="false" prefHeight="55.0" prefWidth="200.0" text="英雄" textFill="WHITE" GridPane.columnIndex="2">
                <font>
-                  <Font name="System Bold Italic" size="16.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="toolsButton" mnemonicParsing="false" onAction="#toolsButtonOnClick" prefHeight="42.0" prefWidth="200.0" text="工具" textFill="WHITE" GridPane.columnIndex="5">
+            <Button fx:id="searchPlayerButton" mnemonicParsing="false" prefHeight="55.0" prefWidth="200.0" text="搜索" textFill="WHITE" GridPane.columnIndex="3">
                <font>
-                  <Font name="System Bold Italic" size="16.0" />
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="rankingButton" mnemonicParsing="false" prefHeight="55.0" prefWidth="200.0" text="排行榜" textFill="WHITE" GridPane.columnIndex="4">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="toolsButton" mnemonicParsing="false" onAction="#toolsButtonOnClick" prefHeight="55.0" prefWidth="200.0" text="工具" textFill="WHITE" GridPane.columnIndex="5">
+               <font>
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Button>
          </children>
       </GridPane>
-      <Pane fx:id="subPane" layoutY="36.0" prefHeight="750.0" prefWidth="1320.0">
+      <Pane fx:id="subPane" layoutY="65.0" prefHeight="735.0" prefWidth="1320.0">
          <children>
             <GridPane fx:id="mainGridPane" layoutX="194.0" layoutY="106.0" prefHeight="538.0" prefWidth="949.0">
                <columnConstraints>
@@ -73,24 +73,29 @@
                   <CheckBox fx:id="autoAcceptCheckBox" mnemonicParsing="false" onAction="#autoAcceptedCheckBoxOnClicked" prefHeight="18.0" prefWidth="102.0" text="自动接受" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="16.0" />
-                     </font></CheckBox>
+                     </font>
+                  </CheckBox>
                   <CheckBox mnemonicParsing="false" text="伪装离线" textFill="WHITE" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="16.0" />
-                     </font></CheckBox>
+                     </font>
+                  </CheckBox>
                   <CheckBox fx:id="autoDeclineCheckBox" mnemonicParsing="false" onAction="#autoDeclineCheckBoxOnClicked" text="自动拒绝" textFill="WHITE" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="16.0" />
-                     </font></CheckBox>
+                     </font>
+                  </CheckBox>
                   <CheckBox fx:id="fakePromotionCheckBox" mnemonicParsing="false" onAction="#fakePromotionCheckBoxOnClicked" text="一键虚荣" textFill="WHITE" GridPane.rowIndex="3">
                      <font>
                         <Font name="System Bold" size="16.0" />
-                     </font></CheckBox>
+                     </font>
+                  </CheckBox>
                   <ChoiceBox fx:id="fakePromotionChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <CheckBox fx:id="ingameOverlayCheckBox" mnemonicParsing="false" onAction="#inGameOverlayCheckBoxOnClicked" prefHeight="22.0" prefWidth="191.0" text="游戏内覆盖" textFill="WHITE" GridPane.rowIndex="4">
                      <font>
                         <Font name="System Bold" size="16.0" />
-                     </font></CheckBox>
+                     </font>
+                  </CheckBox>
                </children>
             </GridPane>
          </children>

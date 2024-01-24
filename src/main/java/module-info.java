@@ -19,6 +19,7 @@ module com.anicaaz.leaguewarefx {
     exports com.anicaaz.leaguewarefx.utils;
     exports com.anicaaz.leaguewarefx.constants;
     exports com.anicaaz.leaguewarefx.uiPlayground;
-    exports com.anicaaz.leaguewarefx.ui.obj;
+    exports com.anicaaz.leaguewarefx.ui.ingameobj;
     exports com.anicaaz.leaguewarefx.ui.render;
+    exports com.anicaaz.leaguewarefx.ui.clientobj;
 }

@@ -1,5 +1,7 @@
 package com.anicaaz.leaguewarefx.utils;
 
+import java.util.Date;
+
 /**
  * 打日志
  * 目前是向终端输出
@@ -15,5 +17,10 @@ public class LogUtil {
      */
     public static void log(String className, String methodName, String msg) {
         System.out.printf("[%s类的%s方法]：%s\n", className, methodName, msg);
+    }
+
+    public static void log(String msg) {
+        Date date = new Date();
+        System.out.printf("[%s]: %s\n", date.toString(), msg);
     }
 }
