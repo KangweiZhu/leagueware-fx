@@ -3,6 +3,7 @@ package com.anicaaz.leaguewarefx.utils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.scene.image.Image;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 @Data
 @AllArgsConstructor
@@ -119,30 +121,41 @@ public class HttpsUtil {
         return nodes;
     }
 
-    public void downloadImage(String filePath, String authorizationToken) throws Exception {
+    public void downloadImage(String fsDest, String authorizationToken) throws Exception {
         URL url = new URL(apiUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod(requestMethod);
         connection.setRequestProperty("Authorization", authorizationToken);
         InputStream inStream = connection.getInputStream();
         byte[] data = readInputStream(inStream);
-        File imageFile = new File(filePath);
+        File imageFile = new File(fsDest);
         FileOutputStream outStream = new FileOutputStream(imageFile);
         outStream.write(data);
         outStream.close();
     }
 
-    public void downloadImage(String filePath) throws Exception {
+    public void downloadImage(String fsDest) throws Exception {
         URL url = new URL(apiUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod(requestMethod);
         InputStream inStream = connection.getInputStream();
         byte[] data = readInputStream(inStream);
-        File imageFile = new File(filePath);
+        File imageFile = new File(fsDest);
         FileOutputStream outStream = new FileOutputStream(imageFile);
         outStream.write(data);
         outStream.close();
     }
+
+    public CompletableFuture<Void> asyncDownloadImage(String fsDest) {
+        return CompletableFuture.runAsync(() -> {
+            try {
+                downloadImage(fsDest);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
 
     public static byte[] readInputStream(InputStream inStream) throws Exception {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();

@@ -45,3 +45,12 @@
 .line{
     -fx-stroke: #2D3848;
 }
+#matchHistoryList .scroll-bar:vertical{
+    -fx-scale-x: 0;
+}
+#matchHistoryList .scroll-bar:horizontal{
+    -fx-scale-x: 0;
+}
+#matchHistoryList .list-cell{
+    -fx-padding: 0;
+}

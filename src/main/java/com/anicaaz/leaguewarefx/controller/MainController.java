@@ -4,13 +4,14 @@ import com.anicaaz.leaguewarefx.LeagueWareFXStarter;
 import com.anicaaz.leaguewarefx.constants.AssetsFilePathConstants;
 import com.anicaaz.leaguewarefx.constants.RequestConstants;
 import com.anicaaz.leaguewarefx.ui.clientobj.*;
+import com.anicaaz.leaguewarefx.ui.render.MatchResultBrief;
 import com.anicaaz.leaguewarefx.utils.EffectsRenderer;
 import com.anicaaz.leaguewarefx.utils.FileUtil;
 import com.anicaaz.leaguewarefx.utils.HttpsUtil;
 import com.anicaaz.leaguewarefx.utils.LogUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.net.httpserver.HttpServer;
-import javafx.animation.FadeTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,12 +21,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -58,7 +59,7 @@ public class MainController implements Initializable {
     @FXML
     private ImageView historyHighestRankImage;
     @FXML
-    private ListView matchHistoryList;
+    private ListView<Pane> matchHistoryList;
 
     /**
      * 如果点击到tools，那么就加载tool-view的fxml文件。
@@ -113,48 +114,83 @@ public class MainController implements Initializable {
     }
 
     public void setUpMyMatchHistory() {
+        ObservableList<Pane> matchresults = FXCollections.observableArrayList();
         HttpsUtil httpsUtil = new HttpsUtil(RequestConstants.BASEURL + LeagueWareFXStarter.appPort + RequestConstants.GET_MATCH_HISTORY, RequestConstants.GET);
         try {
             String res = httpsUtil.sendHttpRequestAndGetResponse(LeagueWareFXStarter.remotingAuthToken);
             ObjectMapper objectMapper = new ObjectMapper();
             GameData gameData = objectMapper.readValue(res, GameData.class);
             List<Game> gamesList = gameData.getGames().getGames();
-            int cnt = 0;
-            for (Game game : gamesList) {
-                if (cnt == 0) {
-                    cnt ++;
-                    String mode = game.getGameMode();
-                    List<ParticipantIdentity> participantIdentities = game.getParticipantIdentities();
-                    List<Participant> participants = game.getParticipants();
-                    Participant me = participants.get(0);
-                    Stats stats = me.getStats();
-                    Long gameDateRaw = game.getGameCreation();
-                    int gameDurationRaw = game.getGameDuration();
-                    int item1Raw = stats.getItem1();
-                    int item2Raw = stats.getItem2();
-                    int item3Raw = stats.getItem3();
-                    int item4Raw = stats.getItem4();
-                    int item5Raw = stats.getItem5();
-                    int item6Raw = stats.getItem6();
-                    int item7Raw = stats.getVisionWardsBoughtInGame();
-                    int kill = stats.getKills();
-                    int death = stats.getDeaths();
-                    int assist = stats.getAssists();
-                    int summonerSpell1Raw = me.getSpell1Id();
-                    int summonerSpell2Raw = me.getSpell2Id();
-                    int championPlayedRaw = me.getChampionId();
-                    String kda = kill + " / " + death + " / " + assist;
-                    String result = me.getStats().isWin() ? "胜利" : "失败";
-                    System.out.println(kda);
-                    System.out.println(championPlayedRaw);
-                    Image image;
-                    if (!FileUtil.checkIfFileExist(AssetsFilePathConstants.CHAMPIONICONSROOT + championPlayedRaw + ".png")) {
-                        HttpsUtil imageDownloader = new HttpsUtil(RequestConstants.CHAMPION_ICON_BASE + championPlayedRaw + ".png", RequestConstants.GET);
-                        imageDownloader.downloadImage(AssetsFilePathConstants.CHAMPIONICONSROOT + championPlayedRaw + ".png");
-                    }
-                    image = new Image(AssetsFilePathConstants.CHAMPIONICONSROOTIMAGE + championPlayedRaw + ".png");
+
+            for (int i = 0; i < gamesList.size(); i++) {
+                Game game = gamesList.get(i);
+                String mode = game.getGameMode();
+                List<ParticipantIdentity> participantIdentities = game.getParticipantIdentities();
+                List<Participant> participants = game.getParticipants();
+                Participant me = participants.get(0);
+                Stats stats = me.getStats();
+                Long gameDateRaw = game.getGameCreation();
+                Integer gameDurationRaw = game.getGameDuration();
+                int item1Raw = stats.getItem1();
+                int item2Raw = stats.getItem2();
+                int item3Raw = stats.getItem3();
+                int item4Raw = stats.getItem4();
+                int item5Raw = stats.getItem5();
+                int item6Raw = stats.getItem6();
+                int item0Raw = stats.getItem0();
+
+                int kill = stats.getKills();
+                int death = stats.getDeaths();
+                int assist = stats.getAssists();
+                int summonerSpell1Raw = me.getSpell1Id();
+                int summonerSpell2Raw = me.getSpell2Id();
+                int championPlayedRaw = me.getChampionId();
+                String kda = kill + " / " + death + " / " + assist;
+                String result = me.getStats().isWin() ? "胜利" : "失败";
+
+                //下载ChampionImage
+                Image championImage = new Image(AssetsFilePathConstants.CHAMPIONICONSROOTIMAGE + championPlayedRaw + ".png");
+
+                //下载SpellImage 1
+                Image summonerSpell1 = new Image(AssetsFilePathConstants.SUMMONERSPELLICONSIMAGE + summonerSpell1Raw + ".png");
+
+                //下载SpellImage 2
+                Image summonerSpell2 = new Image(AssetsFilePathConstants.SUMMONERSPELLICONSIMAGE + summonerSpell2Raw + ".png");
+
+                Image itemImage0 = null;
+                Image itemImage1 = null;
+                Image itemImage2 = null;
+                Image itemImage3 = null;
+                Image itemImage4 = null;
+                Image itemImage5 = null;
+                Image itemImage6 = null;
+                if (item0Raw != 0) {
+                    itemImage0 = new Image(AssetsFilePathConstants.ITEMICONROOTImage + item0Raw + ".png");
                 }
+                if (item1Raw != 0) {
+                    itemImage1 = new Image(AssetsFilePathConstants.ITEMICONROOTImage + item1Raw + ".png");
+                }
+                if (item2Raw != 0) {
+                    itemImage2 = new Image(AssetsFilePathConstants.ITEMICONROOTImage + item2Raw + ".png");
+                }
+                if (item3Raw != 0) {
+                    itemImage3 = new Image(AssetsFilePathConstants.ITEMICONROOTImage + item3Raw + ".png");
+                }
+                if (item4Raw != 0) {
+                    itemImage4 = new Image(AssetsFilePathConstants.ITEMICONROOTImage + item4Raw + ".png");
+                }
+                if (item5Raw != 0) {
+                    itemImage5 = new Image(AssetsFilePathConstants.ITEMICONROOTImage + item5Raw + ".png");
+                }
+                if (item6Raw != 0) {
+                    itemImage6 = new Image(AssetsFilePathConstants.ITEMICONROOTImage + item6Raw + ".png");
+                }
+
+
+                MatchResultBrief matchResultBrief = new MatchResultBrief(null, result, mode, kda, gameDurationRaw.toString(), gameDateRaw.toString(), championImage, summonerSpell1, summonerSpell2, itemImage0, itemImage1, itemImage2, itemImage3, itemImage4, itemImage5, itemImage6);
+                matchresults.add(matchResultBrief.getView());
             }
+            matchHistoryList.setItems(matchresults);
         } catch (IOException e) {
             LogUtil.log("无法获取到比赛记录");
             throw new RuntimeException(e);

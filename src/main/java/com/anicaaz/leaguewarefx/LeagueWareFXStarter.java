@@ -1,5 +1,6 @@
 package com.anicaaz.leaguewarefx;
 
+import com.anicaaz.leaguewarefx.constants.AssetsFilePathConstants;
 import com.anicaaz.leaguewarefx.constants.RequestConstants;
 import com.anicaaz.leaguewarefx.utils.*;
 import javafx.application.Application;
@@ -11,6 +12,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
@@ -68,10 +70,23 @@ public class LeagueWareFXStarter extends Application {
      * 主入口。获取必要信息，并调用javafx的launch方法来启动app.
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         getConnectionPrerequisites();
         getSummonerInfo();
         getScreenInfo();
+        //todo: 优化成python脚本。
+        if (!FileUtil.checkIfFileExist(AssetsFilePathConstants.SUMMONERSPELLICONSROOT + "1.png")){
+            LogUtil.log("Downloading summoner icons");
+            FileUtil.downloadSummonerSpellsIcons("https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/summoner-spells.json");
+
+        }
+        if (!FileUtil.checkIfFileExist(AssetsFilePathConstants.CHAMPIONICONSROOT + "1.png")) {
+            LogUtil.log("Downloading champion icons");
+            FileUtil.downloadChampionIcons("https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-summary.json");
+        }
+        if (!FileUtil.checkIfFileExist(AssetsFilePathConstants.ITEMICONROOT + "1001.png")) {
+            FileUtil.downloadItemIcons("https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/items.json");
+        }
         launch();
     }
 

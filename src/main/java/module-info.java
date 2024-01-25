@@ -13,6 +13,7 @@ module com.anicaaz.leaguewarefx {
     opens com.anicaaz.leaguewarefx to javafx.fxml;
     opens com.anicaaz.leaguewarefx.controller to javafx.fxml;
     opens com.anicaaz.leaguewarefx.utils to javafx.fxml;
+    opens com.anicaaz.leaguewarefx.ui.render to javafx.fxml;
 
     exports com.anicaaz.leaguewarefx;
     exports com.anicaaz.leaguewarefx.controller;

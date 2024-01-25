@@ -1,3 +1,6 @@
 #matchHistoryBriefPane{
     -fx-background-color: #3A4556;
 }
+.image-view{
+    -fx-bottom: #2D3848;
+}
