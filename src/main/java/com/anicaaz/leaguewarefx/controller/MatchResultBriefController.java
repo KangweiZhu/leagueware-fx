@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import lombok.Data;
 
@@ -47,7 +48,8 @@ public class MatchResultBriefController {
 
 
     public void updateAll(String result, String mode, String kda, String gameDuration, String gameDate, Image championImage,
-                           Image summonerSpell1, Image summonerSpell2, Image itemImage0, Image itemImage1, Image itemImage2, Image itemImage3, Image itemImage4, Image itemImage5, Image itemImage6) {
+                           Image summonerSpell1, Image summonerSpell2, Image itemImage0, Image itemImage1, Image itemImage2,
+                          Image itemImage3, Image itemImage4, Image itemImage5, Image itemImage6) {
         this.result.setText(result);
         this.mode.setText(mode);
         this.kda.setText(kda);
@@ -56,7 +58,6 @@ public class MatchResultBriefController {
         this.championImage.setImage(championImage);
         this.summonerSpell1.setImage(summonerSpell1);
         this.summonerSpell2.setImage(summonerSpell2);
-
         this.itemImage0.setImage(itemImage0);
         this.itemImage1.setImage(itemImage1);
         this.itemImage2.setImage(itemImage2);
@@ -64,8 +65,10 @@ public class MatchResultBriefController {
         this.itemImage4.setImage(itemImage4);
         this.itemImage5.setImage(itemImage5);
         this.itemImage6.setImage(itemImage6);
+        this.gameDate.setText(gameDate);
         if (result.equals("失败")) {
-            this.resIndicator.setStyle("-fx-background-color: #FF5859");
+            this.resIndicator.setFill(Paint.valueOf("#FF5859"));
+            this.result.setTextFill(Paint.valueOf("#FF5859"));
         }
     }
 }

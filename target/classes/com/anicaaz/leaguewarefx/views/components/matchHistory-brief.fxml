@@ -9,15 +9,15 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="matchHistoryBriefPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="430.0" stylesheets="@../../assets/css/matchHistory-brief.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.anicaaz.leaguewarefx.controller.MatchResultBriefController">
+<Pane fx:id="matchHistoryBriefPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="440.0" stylesheets="@../../assets/css/matchHistory-brief.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.anicaaz.leaguewarefx.controller.MatchResultBriefController">
    <children>
-      <Rectangle fx:id="resIndicator" arcHeight="5.0" arcWidth="5.0" fill="#2deb90" height="70.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
-      <ImageView fx:id="championImage" fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
+      <Rectangle fx:id="resIndicator" arcHeight="5.0" arcWidth="5.0" fill="#2deb90" height="50.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="7.0" />
+      <ImageView fx:id="championImage" fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="result" layoutX="61.0" layoutY="15.0" prefHeight="15.0" prefWidth="45.0" text="win" textFill="#2deb90" />
-      <Label fx:id="mode" layoutX="61.0" layoutY="39.0" prefHeight="15.0" prefWidth="45.0" text="mode" textFill="WHITE" />
-      <ImageView fx:id="summonerSpell1" fitHeight="20.0" fitWidth="20.0" layoutX="14.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="summonerSpell2" fitHeight="20.0" fitWidth="20.0" layoutX="34.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="kda" layoutX="126.0" layoutY="28.0" prefHeight="15.0" prefWidth="101.0" text="999 / 999 / 999 " textFill="WHITE">
+      <Label fx:id="mode" layoutX="61.0" layoutY="43.0" prefHeight="15.0" prefWidth="203.0" text="mode" textFill="WHITE" />
+      <ImageView fx:id="summonerSpell1" fitHeight="20.0" fitWidth="20.0" layoutX="14.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="summonerSpell2" fitHeight="20.0" fitWidth="20.0" layoutX="34.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="kda" layoutX="151.0" layoutY="28.0" prefHeight="15.0" prefWidth="109.0" text="999 / 999 / 999 " textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -49,7 +49,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="gameDuration" layoutX="349.0" layoutY="40.0" text="24小时24分钟24秒" textFill="WHITE">
+      <Label fx:id="gameDuration" layoutX="352.0" layoutY="46.0" text="24小时24分钟24秒" textFill="WHITE">
          <font>
             <Font name="System Bold" size="8.0" />
          </font>

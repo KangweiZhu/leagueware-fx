@@ -45,6 +45,12 @@
 .line{
     -fx-stroke: #2D3848;
 }
+.list-view .scroll-bar {
+    -fx-max-width: 0;
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
 #matchHistoryList .scroll-bar:vertical{
     -fx-scale-x: 0;
 }
@@ -52,5 +58,8 @@
     -fx-scale-x: 0;
 }
 #matchHistoryList .list-cell{
-    -fx-padding: 0;
+    -fx-padding: 0; /*禁用背景*/
+    -fx-border-width: 0; /*禁用白边框*/
+    -fx-background-insets: 0;
 }
+

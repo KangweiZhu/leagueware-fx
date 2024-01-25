@@ -79,12 +79,12 @@
             <Pane fx:id="recentGamePane" layoutX="775.0" layoutY="36.0" prefHeight="604.0" prefWidth="470.0">
                <children>
                   <Line endX="450.0" layoutY="40.0" startX="20.0" stroke="#2d3848" />
-                  <Label layoutX="20.0" layoutY="14.0" text="最近游戏" textFill="WHITE">
+                  <Label layoutX="20.0" layoutY="14.0" text="历史战绩" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="matchHistoryList" layoutX="20.0" layoutY="52.0" prefHeight="490.0" prefWidth="430.0" />
+                  <ListView fx:id="matchHistoryList" layoutX="15.0" layoutY="52.0" prefHeight="490.0" prefWidth="440.0" />
                </children>
             </Pane>
             <Pane fx:id="historyHighestRankPane" layoutX="70.0" layoutY="410.0" prefHeight="230.0" prefWidth="550.0">

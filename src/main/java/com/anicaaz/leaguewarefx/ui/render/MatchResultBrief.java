@@ -30,7 +30,8 @@ public class MatchResultBrief {
     private Image itemImage7;
 
     public MatchResultBrief(Pane view, String result, String mode, String kda, String gameDuration, String gameDate,
-                            Image championImage, Image summonerSpell1, Image summonerSpell2, Image itemImage0, Image itemImage1, Image itemImage2, Image itemImage3, Image itemImage4, Image itemImage5, Image itemImage6) {
+                            Image championImage, Image summonerSpell1, Image summonerSpell2, Image itemImage0, Image itemImage1,
+                            Image itemImage2, Image itemImage3, Image itemImage4, Image itemImage5, Image itemImage6) {
         this.view = view;
         this.result = result;
         this.mode = mode;

@@ -2,13 +2,11 @@ package com.anicaaz.leaguewarefx.controller;
 
 import com.anicaaz.leaguewarefx.LeagueWareFXStarter;
 import com.anicaaz.leaguewarefx.constants.AssetsFilePathConstants;
+import com.anicaaz.leaguewarefx.constants.GameConstants;
 import com.anicaaz.leaguewarefx.constants.RequestConstants;
 import com.anicaaz.leaguewarefx.ui.clientobj.*;
 import com.anicaaz.leaguewarefx.ui.render.MatchResultBrief;
-import com.anicaaz.leaguewarefx.utils.EffectsRenderer;
-import com.anicaaz.leaguewarefx.utils.FileUtil;
-import com.anicaaz.leaguewarefx.utils.HttpsUtil;
-import com.anicaaz.leaguewarefx.utils.LogUtil;
+import com.anicaaz.leaguewarefx.utils.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -125,12 +124,26 @@ public class MainController implements Initializable {
             for (int i = 0; i < gamesList.size(); i++) {
                 Game game = gamesList.get(i);
                 String mode = game.getGameMode();
+                if (GameConstants.MODE_ARAM_EN.equals(game.getGameMode())) {
+                    mode = GameConstants.MODE_ARAM_ZH;
+                } else if (GameConstants.MODE_PRACTICE_EN.equals(game.getGameMode())) {
+                    mode = GameConstants.MODE_PRACTICE_ZH;
+                } else if (GameConstants.MODE_CLASSIC_EN.equals(game.getGameMode())) {
+                    mode = GameConstants.MODE_CLASSIC_ZH;
+                }
                 List<ParticipantIdentity> participantIdentities = game.getParticipantIdentities();
                 List<Participant> participants = game.getParticipants();
                 Participant me = participants.get(0);
                 Stats stats = me.getStats();
+
                 Long gameDateRaw = game.getGameCreation();
+                Date dateConverted = new Date(gameDateRaw);
+                String gameDate = TimeUtils.dateDiffInDays(dateConverted);
+
+
                 Integer gameDurationRaw = game.getGameDuration();
+                String gameDuration = TimeUtils.durationCalculator(gameDurationRaw);
+
                 int item1Raw = stats.getItem1();
                 int item2Raw = stats.getItem2();
                 int item3Raw = stats.getItem3();
@@ -157,13 +170,13 @@ public class MainController implements Initializable {
                 //下载SpellImage 2
                 Image summonerSpell2 = new Image(AssetsFilePathConstants.SUMMONERSPELLICONSIMAGE + summonerSpell2Raw + ".png");
 
-                Image itemImage0 = null;
-                Image itemImage1 = null;
-                Image itemImage2 = null;
-                Image itemImage3 = null;
-                Image itemImage4 = null;
-                Image itemImage5 = null;
-                Image itemImage6 = null;
+                Image itemImage0 = new Image(AssetsFilePathConstants.ITEMICONROOTImage + 0 + ".png");
+                Image itemImage1 = new Image(AssetsFilePathConstants.ITEMICONROOTImage + 0 + ".png");
+                Image itemImage2 = new Image(AssetsFilePathConstants.ITEMICONROOTImage + 0 + ".png");
+                Image itemImage3 = new Image(AssetsFilePathConstants.ITEMICONROOTImage + 0 + ".png");
+                Image itemImage4 = new Image(AssetsFilePathConstants.ITEMICONROOTImage + 0 + ".png");
+                Image itemImage5 = new Image(AssetsFilePathConstants.ITEMICONROOTImage + 0 + ".png");
+                Image itemImage6 = new Image(AssetsFilePathConstants.ITEMICONROOTImage + 0 + ".png");
                 if (item0Raw != 0) {
                     itemImage0 = new Image(AssetsFilePathConstants.ITEMICONROOTImage + item0Raw + ".png");
                 }
@@ -187,7 +200,7 @@ public class MainController implements Initializable {
                 }
 
 
-                MatchResultBrief matchResultBrief = new MatchResultBrief(null, result, mode, kda, gameDurationRaw.toString(), gameDateRaw.toString(), championImage, summonerSpell1, summonerSpell2, itemImage0, itemImage1, itemImage2, itemImage3, itemImage4, itemImage5, itemImage6);
+                MatchResultBrief matchResultBrief = new MatchResultBrief(null, result, mode, kda, gameDuration, gameDate, championImage, summonerSpell1, summonerSpell2, itemImage0, itemImage1, itemImage2, itemImage3, itemImage4, itemImage5, itemImage6);
                 matchresults.add(matchResultBrief.getView());
             }
             matchHistoryList.setItems(matchresults);
