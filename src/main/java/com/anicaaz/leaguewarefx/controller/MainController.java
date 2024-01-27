@@ -140,7 +140,6 @@ public class MainController implements Initializable {
                 Date dateConverted = new Date(gameDateRaw);
                 String gameDate = TimeUtils.dateDiffInDays(dateConverted);
 
-
                 Integer gameDurationRaw = game.getGameDuration();
                 String gameDuration = TimeUtils.durationCalculator(gameDurationRaw);
 
@@ -161,13 +160,13 @@ public class MainController implements Initializable {
                 String kda = kill + " / " + death + " / " + assist;
                 String result = me.getStats().isWin() ? "胜利" : "失败";
 
-                //下载ChampionImage
+                //加载ChampionImage
                 Image championImage = new Image(AssetsFilePathConstants.CHAMPIONICONSROOTIMAGE + championPlayedRaw + ".png");
 
-                //下载SpellImage 1
+                //加载SpellImage 1
                 Image summonerSpell1 = new Image(AssetsFilePathConstants.SUMMONERSPELLICONSIMAGE + summonerSpell1Raw + ".png");
 
-                //下载SpellImage 2
+                //加载SpellImage 2
                 Image summonerSpell2 = new Image(AssetsFilePathConstants.SUMMONERSPELLICONSIMAGE + summonerSpell2Raw + ".png");
 
                 Image itemImage0 = new Image(AssetsFilePathConstants.ITEMICONROOTImage + 0 + ".png");
@@ -198,8 +197,6 @@ public class MainController implements Initializable {
                 if (item6Raw != 0) {
                     itemImage6 = new Image(AssetsFilePathConstants.ITEMICONROOTImage + item6Raw + ".png");
                 }
-
-
                 MatchResultBrief matchResultBrief = new MatchResultBrief(null, result, mode, kda, gameDuration, gameDate, championImage, summonerSpell1, summonerSpell2, itemImage0, itemImage1, itemImage2, itemImage3, itemImage4, itemImage5, itemImage6);
                 matchresults.add(matchResultBrief.getView());
             }

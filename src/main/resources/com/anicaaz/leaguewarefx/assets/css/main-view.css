@@ -32,15 +32,19 @@
 }
 #currentRankPane{
     -fx-background-color: #3A4556;
+    -fx-background-radius: 5;
 }
 #recentGamePane{
     -fx-background-color: #3A4556;
+    -fx-background-radius: 5;
 }
 #historyHighestRankPane{
     -fx-background-color: #3A4556;
+    -fx-background-radius: 5;
 }
 #matchHistoryList{
     -fx-background-color: #3A4556;
+    -fx-smooth-scrolling: true;
 }
 .line{
     -fx-stroke: #2D3848;
@@ -57,9 +61,9 @@
 #matchHistoryList .scroll-bar:horizontal{
     -fx-scale-x: 0;
 }
-#matchHistoryList .list-cell{
-    -fx-padding: 0; /*禁用背景*/
-    -fx-border-width: 0; /*禁用白边框*/
-    -fx-background-insets: 0;
+#matchHistoryList .list-cell {
+    -fx-padding: 0;
+    -fx-border-color: #2d3848;
+    -fx-border-width: 0 0 1 0; /* top right bottom left */
 }
 

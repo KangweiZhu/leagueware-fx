@@ -9,6 +9,7 @@ module com.anicaaz.leaguewarefx {
     requires com.sun.jna;
     requires com.sun.jna.platform;
     requires com.google.gson;
+    requires java.desktop;
 
     opens com.anicaaz.leaguewarefx to javafx.fxml;
     opens com.anicaaz.leaguewarefx.controller to javafx.fxml;

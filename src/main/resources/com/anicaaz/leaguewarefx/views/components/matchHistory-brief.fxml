@@ -17,7 +17,7 @@
       <Label fx:id="mode" layoutX="61.0" layoutY="43.0" prefHeight="15.0" prefWidth="203.0" text="mode" textFill="WHITE" />
       <ImageView fx:id="summonerSpell1" fitHeight="20.0" fitWidth="20.0" layoutX="14.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="summonerSpell2" fitHeight="20.0" fitWidth="20.0" layoutX="34.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="kda" layoutX="151.0" layoutY="28.0" prefHeight="15.0" prefWidth="109.0" text="999 / 999 / 999 " textFill="WHITE">
+      <Label fx:id="kda" layoutX="143.0" layoutY="28.0" prefHeight="15.0" prefWidth="99.0" text="999 / 999 / 999 " textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

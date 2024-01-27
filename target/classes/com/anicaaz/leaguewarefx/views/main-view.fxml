@@ -34,7 +34,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="personInfoButton" mnemonicParsing="false" prefHeight="55.0" prefWidth="200.0" text="英雄" textFill="WHITE" GridPane.columnIndex="2">
+            <Button fx:id="personInfoButton" mnemonicParsing="false" prefHeight="55.0" prefWidth="200.0" text="游戏内绘制" textFill="WHITE" GridPane.columnIndex="2">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -49,7 +49,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="toolsButton" mnemonicParsing="false" onAction="#toolsButtonOnClick" prefHeight="55.0" prefWidth="200.0" text="工具" textFill="WHITE" GridPane.columnIndex="5">
+            <Button fx:id="toolsButton" mnemonicParsing="false" onAction="#toolsButtonOnClick" prefHeight="55.0" prefWidth="200.0" text="杂项" textFill="WHITE" GridPane.columnIndex="5">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -58,7 +58,7 @@
       </GridPane>
       <Pane fx:id="subPane" layoutY="65.0" prefHeight="735.0" prefWidth="1320.0">
          <children>
-            <Text fx:id="summonerName" fill="WHITE" layoutX="145.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Failed Loading" wrappingWidth="399.62890625">
+            <Text fx:id="summonerName" fill="WHITE" layoutX="159.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Failed Loading" wrappingWidth="399.62890625">
                <font>
                   <Font name="Segoe UI Semibold" size="26.0" />
                </font>
@@ -84,13 +84,13 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="matchHistoryList" layoutX="15.0" layoutY="52.0" prefHeight="490.0" prefWidth="440.0" />
+                  <ListView fx:id="matchHistoryList" layoutX="20.0" layoutY="52.0" prefHeight="540.0" prefWidth="430.0" />
                </children>
             </Pane>
             <Pane fx:id="historyHighestRankPane" layoutX="70.0" layoutY="410.0" prefHeight="230.0" prefWidth="550.0">
                <children>
                   <Line endX="450.0" layoutY="40.0" startX="20.0" stroke="#2d3848" />
-                  <Label layoutX="20.0" layoutY="14.0" text="最近一起游戏过的队友" textFill="WHITE">
+                  <Label layoutX="20.0" layoutY="14.0" text="当前状态" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

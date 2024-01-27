@@ -45,8 +45,6 @@ public class MatchResultBriefController {
     @FXML
     private ImageView itemImage6;
 
-
-
     public void updateAll(String result, String mode, String kda, String gameDuration, String gameDate, Image championImage,
                            Image summonerSpell1, Image summonerSpell2, Image itemImage0, Image itemImage1, Image itemImage2,
                           Image itemImage3, Image itemImage4, Image itemImage5, Image itemImage6) {

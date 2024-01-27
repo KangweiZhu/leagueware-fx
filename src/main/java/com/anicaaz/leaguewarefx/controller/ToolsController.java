@@ -154,6 +154,7 @@ public class ToolsController implements Initializable {
 
     private void ingameOverlayHelper() throws IOException, InterruptedException {
         int logFlag = 0;
+        int initializedFlag = 0;
         //如果一直为true，则进程一直执行。
         while (monitorIngameOverlayThreadFlag) {
             while (OSUtil.checkProcess("League of Legends.exe")) {
@@ -182,6 +183,9 @@ public class ToolsController implements Initializable {
             }
             playerService.checkPlayerItemUpdate();
             playerService.setPrevplayerList(playerList);
+            if (initializedFlag++ == 0) {
+                playerService.drawEnemySpellsInfo();
+            }
 
             // 停0.5秒。
             Thread.sleep(500);
