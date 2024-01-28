@@ -38,7 +38,6 @@ public class PlayerService {
                 int prevCount = 0;
                 for (Item item : prevCurrentPlayerItems) {
                     prevCount += item.getPrice();
-
                 }
                 if (prevCount != count) {
                     OverlayController.addNotification(currentPlayer.getChampionName() + "装备更新了");
