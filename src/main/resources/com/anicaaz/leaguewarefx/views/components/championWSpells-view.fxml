@@ -5,7 +5,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="40.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.anicaaz.leaguewarefx.controller.SummonerWSpellsController">
    <children>
-      <ImageView fx:id="championImage" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="championImage" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#championImageClickedListener" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="summonerSpell1" fitHeight="20.0" fitWidth="20.0" layoutY="40.0" onMouseClicked="#spellOneClickedListener" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="summonerSpell2" fitHeight="20.0" fitWidth="20.0" layoutX="20.0" layoutY="40.0" onMouseClicked="#spellTwoClickedListener" pickOnBounds="true" preserveRatio="true" />
    </children>

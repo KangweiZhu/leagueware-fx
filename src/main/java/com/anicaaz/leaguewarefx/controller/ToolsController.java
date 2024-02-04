@@ -1,14 +1,13 @@
 package com.anicaaz.leaguewarefx.controller;
 
 import com.anicaaz.leaguewarefx.LeagueWareFXStarter;
+import com.anicaaz.leaguewarefx.constants.GlobalVariables;
 import com.anicaaz.leaguewarefx.constants.RequestConstants;
-import com.anicaaz.leaguewarefx.service.PlayerService;
+import com.anicaaz.leaguewarefx.service.legit.PlayerService;
 import com.anicaaz.leaguewarefx.ui.ingameobj.GameData;
+import com.anicaaz.leaguewarefx.ui.ingameobj.GameDetails;
 import com.anicaaz.leaguewarefx.ui.ingameobj.Player;
-import com.anicaaz.leaguewarefx.utils.EffectsRenderer;
-import com.anicaaz.leaguewarefx.utils.HttpsUtil;
-import com.anicaaz.leaguewarefx.utils.LogUtil;
-import com.anicaaz.leaguewarefx.utils.OSUtil;
+import com.anicaaz.leaguewarefx.utils.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -122,7 +121,6 @@ public class ToolsController implements Initializable {
 
     public void fakePromotionCheckBoxOnClicked() {
         initProxyServer();
-
     }
 
     private void initProxyServer() {
@@ -131,7 +129,6 @@ public class ToolsController implements Initializable {
 
     /**
      * 游戏内绘制按钮被选中，或点击后变成未选中状态。通过多线程来解决干扰。
-     *
      */
     public void inGameOverlayCheckBoxOnClicked() {
         if (ingameOverlayCheckBox.isSelected()) {
@@ -181,11 +178,18 @@ public class ToolsController implements Initializable {
             if (playerService.getPrevplayerList() == null || playerService.getPrevplayerList().isEmpty()) {
                 playerService.setPrevplayerList(playerList);
             }
+            playerService.setEnemyId();
             playerService.checkPlayerItemUpdate();
             playerService.setPrevplayerList(playerList);
+
+            // 绘制敌方召唤师图标和技能
             if (initializedFlag++ == 0) {
                 playerService.drawEnemySpellsInfo();
             }
+
+            // 记录当前游戏时间
+            GameDetails gameDetails = gameData.getGameData();
+            GlobalVariables.GAME_TIME = gameDetails.getGameTime();
 
             // 停0.5秒。
             Thread.sleep(500);

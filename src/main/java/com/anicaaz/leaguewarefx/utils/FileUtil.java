@@ -11,27 +11,42 @@ import javafx.scene.image.Image;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
  * 文件工具类
+ *
  * @author anicaa
  */
 public class FileUtil {
 
     /**
      * Check if a file exists in a certain path or not.
+     *
      * @return true if exists, false if not exists.
      */
     public static boolean checkIfFileExist(String filePath) {
-        File file = new File(filePath);
-        if (file.exists()) {
-            return true;
-        } else {
-            return false;
+        boolean res = false;
+        //先转成URL. 避免找不到直接报not absolute
+        URL fileUrl = LeagueWareFXStarter.class.getResource(filePath);
+        if (fileUrl != null) {
+            try {
+                URI fileUri = fileUrl.toURI();
+                File file = new File(fileUri);
+                if (file.exists()) {
+                    res = true;
+                }
+            } catch (URISyntaxException e) {
+                LogUtil.log(filePath + " 路径的文件不存在");
+                return res;
+            }
         }
+        return res;
     }
 
     public static void downloadSummonerSpellsIcons(String httpUrl) throws IOException {
@@ -40,12 +55,11 @@ public class FileUtil {
         httpsUtil.setRequestMethod(RequestConstants.GET);
         String jsonString = httpsUtil.sendHttpRequestAndGetResponse();
         JsonArray jsonArray = JsonParser.parseString(jsonString).getAsJsonArray();
-        for(JsonElement jsonElement : jsonArray) {
+        for (JsonElement jsonElement : jsonArray) {
             JsonObject jsonObject = jsonElement.getAsJsonObject();
             String id = jsonObject.get("id").getAsString();
             String iconPath = jsonObject.get("iconPath").getAsString();
             String downloadUrl = RequestConstants.BASEURL + LeagueWareFXStarter.appPort + iconPath;
-            System.out.println(downloadUrl);
             httpsUtil.setApiUrl(downloadUrl);
             httpsUtil.setRequestMethod(RequestConstants.GET);
             try {
@@ -62,7 +76,7 @@ public class FileUtil {
         httpsUtil.setRequestMethod(RequestConstants.GET);
         String jsonString = httpsUtil.sendHttpRequestAndGetResponse();
         JsonArray jsonArray = JsonParser.parseString(jsonString).getAsJsonArray();
-        for(JsonElement jsonElement : jsonArray) {
+        for (JsonElement jsonElement : jsonArray) {
             JsonObject jsonObject = jsonElement.getAsJsonObject();
             String id = jsonObject.get("id").getAsString();
             String squarePortraitPath = jsonObject.get("squarePortraitPath").getAsString();
@@ -79,6 +93,7 @@ public class FileUtil {
 
     /**
      * 本地json文件转换成String
+     *
      * @param filePath 相对路径
      * @return Json字符串
      */
@@ -101,7 +116,7 @@ public class FileUtil {
         httpsUtil.setRequestMethod(RequestConstants.GET);
         String jsonString = httpsUtil.sendHttpRequestAndGetResponse();
         JsonArray jsonArray = JsonParser.parseString(jsonString).getAsJsonArray();
-        for(JsonElement jsonElement : jsonArray) {
+        for (JsonElement jsonElement : jsonArray) {
             JsonObject jsonObject = jsonElement.getAsJsonObject();
             String id = jsonObject.get("id").getAsString();
             String iconPath = jsonObject.get("iconPath").getAsString();
@@ -136,6 +151,9 @@ public class FileUtil {
 
     public static void main(String[] args) {
         String test = FileUtil.jsonFile2String("/com/anicaaz/leaguewarefx/assets/json/summonerSpells.json");
-        System.out.println(test);
+        boolean test2 = FileUtil.checkIfFileExist(String.valueOf(LeagueWareFXStarter.class.getResource(AssetsFilePathConstants.profileIconFilePath)));
+
+        System.out.println(FileUtil.checkIfFileExist( "/com/anicaaz/leaguewarefx/assets/static/itemIcons/1001.png"));
+        System.out.println(LeagueWareFXStarter.class.getResource(AssetsFilePathConstants.ITEMICONROOTImage + "1001.png"));
     }
 }

@@ -6,19 +6,19 @@ import com.anicaaz.leaguewarefx.utils.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * LeagueWare程序的主入口，负责在视图显示前，获取必要的信息。如token, 端口，用户信息
+ *
  * @author anicaa
  */
 public class LeagueWareFXStarter extends Application {
@@ -68,6 +68,7 @@ public class LeagueWareFXStarter extends Application {
 
     /**
      * 主入口。获取必要信息，并调用javafx的launch方法来启动app.
+     *
      * @param args
      */
     public static void main(String[] args) throws IOException {
@@ -75,17 +76,46 @@ public class LeagueWareFXStarter extends Application {
         getSummonerInfo();
         getScreenInfo();
         //todo: 优化成python脚本。
-        if (!FileUtil.checkIfFileExist(AssetsFilePathConstants.SUMMONERSPELLICONSROOT + "1.png")){
-            LogUtil.log("Downloading summoner icons");
-            FileUtil.downloadSummonerSpellsIcons("https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/summoner-spells.json");
 
+        // 下载所有召唤师图片
+        if (!FileUtil.checkIfFileExist(AssetsFilePathConstants.SUMMONERSPELLICONSIMAGE + "1.png")) {
+            LogUtil.log("召唤师技能图标库不存在，下载中");
+            FileUtil.downloadSummonerSpellsIcons("https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/summoner-spells.json");
+            LogUtil.log("召唤师技能图标库下载完成");
+        } else {
+            LogUtil.log("召唤师技能图标库存在");
         }
-        if (!FileUtil.checkIfFileExist(AssetsFilePathConstants.CHAMPIONICONSROOT + "1.png")) {
-            LogUtil.log("Downloading champion icons");
+
+        // 下载所有英雄正方形小图标
+        if (!FileUtil.checkIfFileExist(AssetsFilePathConstants.CHAMPIONICONSROOTIMAGE + "1.png")) {
+            LogUtil.log("召唤师方形小图标库不存在，下载中");
             FileUtil.downloadChampionIcons("https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-summary.json");
+            LogUtil.log("召唤师方形小图标库下载完成");
+        } else {
+            LogUtil.log("召唤师方形小图标库存在");
         }
-        if (!FileUtil.checkIfFileExist(AssetsFilePathConstants.ITEMICONROOT + "1001.png")) {
+
+        // 下载所有装备缩略图图标
+        if (!FileUtil.checkIfFileExist(AssetsFilePathConstants.ITEMICONROOTImage + "1001.png")) {
+            LogUtil.log("装备缩略图图标库不存在，下载中");
             FileUtil.downloadItemIcons("https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/items.json");
+            LogUtil.log("装备缩略图图标库下载完成");
+        } else {
+            LogUtil.log("装备缩略图图标库存在");
+        }
+
+        if (FileUtil.checkIfFileExist(AssetsFilePathConstants.profileIconFilePath)) {
+            LogUtil.log("主页头像已存在");
+        } else {
+            LogUtil.log("主页头像不存在， 开始下载");
+            String apiUrl = HttpsUtil.constructUrl(RequestConstants.BASEURL, LeagueWareFXStarter.appPort, RequestConstants.GET_PROFILE_ICON + "/" + LeagueWareFXStarter.profileIconId + ".jpg");
+            HttpsUtil httpsUtil = new HttpsUtil(apiUrl, RequestConstants.GET);
+            try {
+                httpsUtil.downloadImage(AssetsFilePathConstants.profileIconRootPath, LeagueWareFXStarter.remotingAuthToken);
+                LogUtil.log("主页头像下载完成");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
         launch();
     }
@@ -102,7 +132,7 @@ public class LeagueWareFXStarter extends Application {
     }
 
     public static void getSummonerInfo() {
-        String apiUrl = HttpsUtil.constructUrl(RequestConstants.BASEURL, appPort,  RequestConstants.GET_CURRENT_SUMMONER_NAME);
+        String apiUrl = HttpsUtil.constructUrl(RequestConstants.BASEURL, appPort, RequestConstants.GET_CURRENT_SUMMONER_NAME);
         HttpsUtil httpsUtil = new HttpsUtil(apiUrl, RequestConstants.GET);
         try {
             Map<String, Object> stringObjectMap = httpsUtil.sendHttpRequest(remotingAuthToken);

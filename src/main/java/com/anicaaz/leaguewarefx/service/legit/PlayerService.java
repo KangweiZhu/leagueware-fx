@@ -1,4 +1,4 @@
-package com.anicaaz.leaguewarefx.service;
+package com.anicaaz.leaguewarefx.service.legit;
 
 import com.anicaaz.leaguewarefx.constants.AssetsFilePathConstants;
 import com.anicaaz.leaguewarefx.controller.OverlayController;
@@ -20,14 +20,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PlayerService {
-
     private List<Player> playerList;
     private List<Player> prevplayerList;
     private OverlayController overlayController;
+
     public void checkPlayerItemUpdate() {
         for (int i = 0; i < playerList.size(); i++) {
             Player currentPlayer = playerList.get(i);
-            Player prevCurrentPlayer = prevplayerList. get(i);
+            Player prevCurrentPlayer = prevplayerList.get(i);
             if (currentPlayer.getTeam().equals("CHAOS")) {
                 List<Item> currentPlayerItems = currentPlayer.getItems();
                 int count = 0;
@@ -46,14 +46,27 @@ public class PlayerService {
         }
     }
 
+    public void setEnemyId() {
+        int count = 0;
+        for (int i = 0; i < playerList.size(); i++) {
+            Player curPlayer = playerList.get(i);
+            if (curPlayer.getTeam().equals("CHAOS")) {
+                curPlayer.setPlayerId(count++);
+            }
+        }
+    }
     public void drawEnemySpellsInfo() {
         for (int i = 0; i < playerList.size(); i++) {
             Player curPlayer = playerList.get(i);
             if (curPlayer.getTeam().equals("CHAOS")) {
+                int enemyId = curPlayer.getPlayerId();
                 //设置召唤师技能
                 SummonerSpells curSummonerSpells = curPlayer.getSummonerSpells();
                 Spell spellOne = curSummonerSpells.getSummonerSpellOne();
                 Spell spellTwo = curSummonerSpells.getSummonerSpellTwo();
+                if (spellOne == null || spellTwo == null) {
+                    continue;
+                }
                 String spellOneName = spellOne.getDisplayName();
                 String spellTwoName = spellTwo.getDisplayName();
                 String spellJsonString = FileUtil.jsonFile2String("/com/anicaaz/leaguewarefx/assets/json/summonerSpells.json");
@@ -67,7 +80,7 @@ public class PlayerService {
                 String championJsonString = FileUtil.jsonFile2String("/com/anicaaz/leaguewarefx/assets/json/champion-summary.json");
                 String championId = FileUtil.getIdFromJsonByName(championJsonString, championName);
                 Image championImage = FileUtil.getImageById(AssetsFilePathConstants.CHAMPIONICONSROOTIMAGE, championId);
-                SummonerWSpells summonerWSpells = new SummonerWSpells(championImage, spellImageOne, spellImageTwo);
+                SummonerWSpells summonerWSpells = new SummonerWSpells(championImage, spellImageOne, spellImageTwo, championName, spellOneName, spellTwoName, enemyId);
                 OverlayController.drawChampionWSpells(summonerWSpells.getPane());
             }
         }

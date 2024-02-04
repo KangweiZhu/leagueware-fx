@@ -1,5 +1,6 @@
 package com.anicaaz.leaguewarefx.ui.ingameobj;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +11,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Player {
     @JsonProperty("championName")
     private String championName;
@@ -43,5 +45,6 @@ public class Player {
     private SummonerSpells summonerSpells;
     @JsonProperty("team")
     private String team;
+    private Integer playerId;
 }
 

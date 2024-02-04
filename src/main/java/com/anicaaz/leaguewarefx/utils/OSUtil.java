@@ -10,7 +10,6 @@ import java.awt.event.KeyEvent;
 import java.lang.annotation.Documented;
 
 /**
- *
  * 负责 操作系统 相关的工具类
  *
  * @author anicaazhu
@@ -19,6 +18,7 @@ public class OSUtil {
     private interface MyUser32 extends Library {
         MyUser32 INSTANCE = Native.load("user32", MyUser32.class);
         int KEYEVENT_KEYUP = 0x0002;
+
         void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
     }
 
@@ -60,6 +60,7 @@ public class OSUtil {
 
     /**
      * 查找 指定名字的进程的 pid
+     *
      * @param target 进程名字
      * @return pid
      */
@@ -97,18 +98,37 @@ public class OSUtil {
         }
     }
 
-        public static void pressEnter() {
-            try {
-                Robot robot = new Robot();
-                robot.keyPress(KeyEvent.VK_ENTER);
-                robot.keyRelease(KeyEvent.VK_ENTER);
-                Thread.sleep(100);
-            } catch (AWTException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+    public static void pressEnter() {
+        try {
+            Robot robot = new Robot();
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            Thread.sleep(100);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
+    }
+
+    public static void selectAllAndCopy() {
+        try {
+            Robot robot = new Robot();
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_A);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+            robot.keyRelease(KeyEvent.VK_A);
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_C);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+            robot.keyRelease(KeyEvent.VK_C);
+            Thread.sleep(100);
+        } catch (AWTException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static void typeString(String text) {
         try {

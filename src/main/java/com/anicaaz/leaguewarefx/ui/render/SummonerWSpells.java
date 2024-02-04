@@ -16,15 +16,23 @@ public class SummonerWSpells {
     private Image summonerSpell1;
     private Image summonerSpell2;
     private SummonerWSpellsController controller;
-    public SummonerWSpells(Image championImage, Image summonerSpell1, Image summonerSpell2) {
+    private String championName;
+    private String spellOneName;
+    private String spellTwoName;
+    private Integer enemyId;
+    public SummonerWSpells(Image championImage, Image summonerSpell1, Image summonerSpell2, String championName, String spellOneName, String spellTwoName, Integer enemyId) {
         this.championImage = championImage;
         this.summonerSpell1 = summonerSpell1;
         this.summonerSpell2 = summonerSpell2;
+        this.championName = championName;
+        this.spellOneName = spellOneName;
+        this.spellTwoName = spellTwoName;
+        this.enemyId = enemyId;
         FXMLLoader fxmlLoader = new FXMLLoader(LeagueWareFXStarter.class.getResource("views/components/championWSpells-view.fxml"));
         try {
             Pane view = fxmlLoader.load();
             controller = fxmlLoader.getController();
-            controller.updateAll(championImage, summonerSpell1, summonerSpell2);
+            controller.updateAll(championImage, summonerSpell1, summonerSpell2, championName, spellOneName, spellTwoName, enemyId);
             this.pane = view;
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -231,7 +231,8 @@ public class HttpsUtil {
         ObjectMapper objectMapper = new ObjectMapper();
 
         // 使用TypeReference来处理JSON数组
-        List<T> resultList = objectMapper.readValue(connection.getInputStream(), new TypeReference<List<T>>() {});
+        List<T> resultList = objectMapper.readValue(connection.getInputStream(), new TypeReference<List<T>>() {
+        });
 
         connection.disconnect();
         return resultList;
@@ -240,22 +241,16 @@ public class HttpsUtil {
     public String sendHttpRequestAndGetResponse(String authorizationToken) throws IOException {
         HttpURLConnection connection = createConnection(authorizationToken);
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        String inputLine;
-        StringBuilder response = new StringBuilder();
-
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-
-        connection.disconnect();
-        return response.toString();
+        return getString(connection);
     }
 
     public String sendHttpRequestAndGetResponse() throws IOException {
         HttpURLConnection connection = createConnection();
 
+        return getString(connection);
+    }
+
+    private String getString(HttpURLConnection connection) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String inputLine;
         StringBuilder response = new StringBuilder();

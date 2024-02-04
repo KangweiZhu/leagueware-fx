@@ -95,21 +95,7 @@ public class MainController implements Initializable {
      * 注意：下载时，File类使用路径是从src开始。而javafx的Image类中的setImage,则是从从com.xxx开始
      */
     public void setprofileIcon() {
-        if (FileUtil.checkIfFileExist(AssetsFilePathConstants.profileIconRootPath)) {
-            LogUtil.log(getClass().getName(), "setprofileIcon", "图片已存在。");
-            profileIcon.setImage(new Image(AssetsFilePathConstants.profileIconFilePath));
-        } else {
-            LogUtil.log(getClass().getName(), "setprofileIcon", "图片不存在，开始下载。");
-            String apiUrl = HttpsUtil.constructUrl(RequestConstants.BASEURL, LeagueWareFXStarter.appPort, RequestConstants.GET_PROFILE_ICON + "/" + LeagueWareFXStarter.profileIconId + ".jpg");
-            HttpsUtil httpsUtil = new HttpsUtil(apiUrl, RequestConstants.GET);
-            try {
-                httpsUtil.downloadImage(AssetsFilePathConstants.profileIconRootPath, LeagueWareFXStarter.remotingAuthToken);
-                Thread.sleep(3000);//等待下载
-                profileIcon.setImage(new Image(AssetsFilePathConstants.profileIconFilePath));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
+        profileIcon.setImage(new Image(AssetsFilePathConstants.profileIconFilePath));
     }
 
     public void setUpMyMatchHistory() {
@@ -211,6 +197,7 @@ public class MainController implements Initializable {
 
     /**
      * 在进入main-view.fxml之后，最先调用这三个方法，以初始化页面。
+     *
      * @param url
      * @param resourceBundle
      */
@@ -225,6 +212,7 @@ public class MainController implements Initializable {
 
     /**
      * 负责处理页面的切换。
+     *
      * @param fxmlFileName fxml文件的名称
      */
     private void loadView(String fxmlFileName) {

@@ -1,4 +1,4 @@
-package com.anicaaz.leaguewarefx.service;
+package com.anicaaz.leaguewarefx.service.legit;
 
 
 import com.anicaaz.leaguewarefx.utils.LogUtil;
